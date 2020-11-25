@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  resources :bookings
+  resources :shows
+  resources :time_slots
+  resources :movies
+  resources :screens
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  root 'home#index'
+  root 'movies#index'
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'users#new', as: 'signup'

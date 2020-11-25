@@ -1,0 +1,47 @@
+<%= form_with(model: show, local: true) do |form| %>
+  <% if show.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(show.errors.count, "error") %> prohibited this show from being saved:</h2>
+
+      <ul>
+        <% show.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :movie_id %>
+    <%= form.text_field :movie_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :screen_id %>
+    <%= form.text_field :screen_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_slot_id %>
+    <%= form.text_field :time_slot_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :show_date %>
+    <%= form.date_select :show_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_seats %>
+    <%= form.number_field :available_seats %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seat_price %>
+    <%= form.text_field :seat_price %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
