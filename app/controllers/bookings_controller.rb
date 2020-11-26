@@ -15,19 +15,27 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @show = Show.find(params[:show_id])
   end
 
   # GET /bookings/1/edit
   def edit
+    @show = @booking.show
   end
 
   # POST /bookings
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
+    @booking.user = current_user
+    @show = Show.find(params[:show_id])
+    puts @booking.inspect
+    puts @show.inspect
+    @show.available_seats -= @booking.seats
 
     respond_to do |format|
       if @booking.save
+	@show.save
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
@@ -42,6 +50,8 @@ class BookingsController < ApplicationController
   def update
     respond_to do |format|
       if @booking.update(booking_params)
+	@booking.show.available_seats += @booking.seats
+        @booking.show.save
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else

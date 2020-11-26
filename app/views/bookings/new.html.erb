@@ -1,5 +1,25 @@
-<h1>New Booking</h1>
-
-<%= render 'form', booking: @booking %>
-
-<%= link_to 'Back', bookings_path %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('input#booking_seats').on('change keyup', function() {
+      const numberOfSeats = $('input#booking_seats').val();
+      const seatPrice = <%= @show.seat_price %>;
+      let total = (numberOfSeats*seatPrice);
+      $('input#booking_total_price').val(total)
+     }); 
+  });
+</script>
+<div class="row">
+  <h2>Booking Ticket for Movie: <%= @show.movie.name%></h2>
+    <table class='table'>
+      <tbody>
+	<tr><td>Screen: </td><td><%= @show.screen.name %></td></tr>      
+	<tr><td>Time Slot: </td><td><%= @show.time_slot.name %></td></tr>
+	<tr><td>Date: </td><td><%= @show.show_date %></td></tr>
+	<tr><td>Start Time: </td><td><%= @show.time_slot.start_time.strftime("%H:%M") %></td></tr>
+        <tr><td>End Time: </td><td><%= @show.time_slot.end_time.strftime("%H:%M") %></td></tr>
+        <tr><td>Price: </td><td><%= @show.seat_price %></td></tr>
+     </tbody>
+   </table>
+  <%= render 'form', booking: @booking, show: @show %>
+  <%= link_to 'Back', bookings_path %>
+</div>

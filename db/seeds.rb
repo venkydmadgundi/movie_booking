@@ -5,16 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-admin_user = User.create!(email: 'admin@admin.com', admin: true, password: 'password', password_confirmation: 'password')
+admin_user = User.create!(name: "Admin", email: 'admin@admin.com', admin: true, password: 'password', password_confirmation: 'password')
 slots_price = {12=>100,15=>150,18=>200,21=>250}
 
-days = [Time.now.yesterday.day,Time.now.day,Time.now.tomorrow.day]
+days = [Time.now.day,Time.now.day.next, Time.now.day.next.next]
 
-movies = Movie.create([ { name: "The Vanishing",director_name:"Kristoffer Nyholm", release_date: Date.today.yesterday, is_active: true}, 
-	  { name: "Tanhaji", director_name:"Om Raut", release_date: Date.today - 5.day, is_active: true},
-          { name: "Vinashkaal",director_name: "Rakesh Sawant", release_date: Date.today - 8.day, is_active: true},
-          { name: "Panga",director_name: "Ashwiny Iyer Tiwari", release_date: Date.today - 9.day, is_active: true},
-          { name: "Durgamati",director_name:"G. Askhok", release_date: Date.today - 10.day, is_active: true}])
+movies = Movie.create([ { name: "The Vanishing",director_name:"Kristoffer Nyholm", release_date: Date.today.yesterday, is_active: true}])
+#	  { name: "Tanhaji", director_name:"Om Raut", release_date: Date.today - 5.day, is_active: true},
+ #         { name: "Vinashkaal",director_name: "Rakesh Sawant", release_date: Date.today - 8.day, is_active: true},
+  #        { name: "Panga",director_name: "Ashwiny Iyer Tiwari", release_date: Date.today - 9.day, is_active: true},
+   #       { name: "Durgamati",director_name:"G. Askhok", release_date: Date.today - 10.day, is_active: true}])
 
 screens = Screen.create!([{name: 'Screen-A', seats: 50},
 		    {name: 'Screen-B', seats: 75},

@@ -10,33 +10,20 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :show_id %>
-    <%= form.text_field :show_id %>
-  </div>
-
   <div class="field">
     <%= form.label :seats %>
-    <%= form.number_field :seats %>
+    <%= form.number_field :seats, max: @show.available_seats, min:1 %>
   </div>
 
   <div class="field">
-    <%= form.label :total_price %>
-    <%= form.text_field :total_price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status %>
+    <%= form.label :total %>
+    <%= form.text_field :total_price, readonly: true %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <% ticket_action = controller.action_name == "new" ? "Book" : "Cancel" %>
+    <%= form.hidden_field :status, value: ticket_action %>
+    <%= hidden_field_tag :show_id, @show.id %>
+    <%= form.submit "#{ticket_action} Ticket", class: 'btn btn-primary' %>
   </div>
 <% end %>

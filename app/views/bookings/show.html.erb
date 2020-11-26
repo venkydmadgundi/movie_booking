@@ -1,29 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @booking.user_id %>
-</p>
-
-<p>
-  <strong>Show:</strong>
-  <%= @booking.show_id %>
-</p>
-
-<p>
-  <strong>Seats:</strong>
-  <%= @booking.seats %>
-</p>
-
-<p>
-  <strong>Total price:</strong>
-  <%= @booking.total_price %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @booking.status %>
-</p>
-
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
-<%= link_to 'Back', bookings_path %>
+<h1>Order</h1>
+<h2>Movie: <%= @booking.show.movie.name%></h2>
+<table class='table' width='50%'>
+  <tbody>
+    <tr><td>Screen: </td><td><%= @booking.show.screen.name %></td></tr>
+    <tr><td>Time Slot: </td><td><%= @booking.show.time_slot.name %></td></tr>
+    <tr><td>Date: </td><td><%= @booking.show.show_date %></td></tr>
+    <tr><td>Start Time: </td><td><%= @booking.show.time_slot.start_time.strftime("%H:%M") %></td></tr>
+    <tr><td>End Time: </td><td><%= @booking.show.time_slot.end_time.strftime("%H:%M") %></td></tr>
+    <tr><td>Seats: </td><td><%= @booking.seats %></td></tr>
+    <tr><td>Ticket Price: </td><td><%= '%.2f' % @booking.total_price %></td></tr>
+  </tbody>
+</table>
