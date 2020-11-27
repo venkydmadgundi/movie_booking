@@ -15,3 +15,14 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+/*$('document').ready(function() {
+	//	  $('body').on('onchnage', 'select#show_movie_id', function () {
+	//	  alert('Venky');
+	//  }
+  $('select#show_movie_id').change(function() { alert('hello'); });
+}*/
+(function($) {
+	  $(document).on("change", "select#show_movie_id", function() {
+		      alert('Venky');
+		    });
+}(jQuery));

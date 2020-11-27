@@ -29,8 +29,6 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.user = current_user
     @booking.show = Show.find(params[:show_id])
-    puts @booking.inspect
-    puts @booking.show.inspect
     @booking.show.available_seats -= @booking.seats
 
     respond_to do |format|

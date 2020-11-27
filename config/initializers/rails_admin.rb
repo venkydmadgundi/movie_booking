@@ -40,6 +40,7 @@ RailsAdmin.config do |config|
 
   config.model Show do
     list do
+      field :id
       field :movie do
 	pretty_value do
           value.try(:name)
@@ -60,7 +61,8 @@ RailsAdmin.config do |config|
     create do
       field :movie
       field :screen
-      field :time_slot
+      field :time_slot do
+      end
       fields :show_date, :available_seats, :seat_price
     end
   end
@@ -80,6 +82,12 @@ RailsAdmin.config do |config|
     end
     create do
       fields :name, :director_name, :release_date, :is_active
+    end
+  end
+
+  config.model Booking do
+    list do
+      fields :user, :show, :seats, :total_price, :created_at, :status
     end
   end
 

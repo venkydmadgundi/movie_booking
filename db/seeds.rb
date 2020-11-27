@@ -22,22 +22,27 @@ screens = Screen.create!([{name: 'Screen-A', seats: 50},
 
 def get_show_time(show_hour)
   case show_hour
-    when 0..11 then "Morning"
+    when 0..10 then "Morning"
     when 12..15 then "Afternoon"
     when 16..20 then "Evening"
     when 21..23 then "Night"
   end
 end
 
+time_slot = TimeSlot.create!([{name: '12-3', start_time: '12', end_time: '15'},
+			      {name: '3-6', start_time: '15', end_time: '18'},
+			      {name: '6-9', start_time: '18', end_time: '21'},
+			      {name: '9-12', start_time: '21', end_time: '24'}])
+
 Screen.all.each do |screen|
   index = 0
   slots_price.each do |slot, price|
     index     = 0 if index == 3
     start_at  = Time.new(Time.now.year, Time.now.month, days[index],slot,0)
-    end_at    = Time.new(Time.now.year, Time.now.month, days[index],slot+2,0)
-    time_slot    = TimeSlot.create({start_time: start_at, end_time: end_at, name: get_show_time(start_at.strftime("%H").to_i)})
-    Movie.active.each do |movie|    
-      Show.create!(movie: movie, screen: screen, time_slot: time_slot, seat_price: price, show_date:  start_at.strftime("%d-%m-%Y"), available_seats: screen.seats - 1 )
+    TimeSlot.all.each do |time_slot|
+      Movie.active.each do |movie|    
+        Show.create!(movie: movie, screen: screen, time_slot: time_slot, seat_price: price, show_date:  start_at.strftime("%d-%m-%Y"), available_seats: screen.seats - 1 )
+      end
     end
     index += 1
   end

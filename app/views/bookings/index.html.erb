@@ -8,6 +8,7 @@
       <th>User</th>
       <th>Movie</th>
       <th>Screen</th>
+      <th>Date</th>
       <th>Time Slot</t>
       <th>Seats</th>
       <th>Total price</th>
@@ -22,6 +23,7 @@
         <td><%= booking.user.name %></td>
 	<td><%= booking.show.movie.name %></td>
 	<td><%= booking.show.screen.name %></td>
+	<td><%= booking.show.show_date %></td>
 	<td><%= booking.show.time_slot.start_time.strftime("%I:%M %p") %> - <%= booking.show.time_slot.end_time.strftime("%I:%M %p")  %></td>
         <td><%= booking.seats %></td>
         <td><%= booking.total_price %></td>

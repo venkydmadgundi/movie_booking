@@ -28,7 +28,7 @@
                          <td><%= show.show_date %></td>
 			 <td><%= show.time_slot.start_time.strftime("%H:%M") %></td>
                          <td><%= show.time_slot.end_time.strftime("%H:%M") %></td>
-                         <td><%= show.seat_price %></td>
+			 <td><%= show.seat_price %></td>
                          <% if current_user && show.valid_showtime? %>
                          <td>
                            <%= link_to new_booking_path(show_id: show.id) do %>
