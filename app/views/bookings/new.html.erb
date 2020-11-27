@@ -10,14 +10,14 @@
 </script>
 <div class="row">
   <h2>Booking Ticket for Movie: <%= @show.movie.name%></h2>
-    <table class='table'>
+    <table class='table-condensed table-striped' width='40%'>
       <tbody>
 	<tr><td>Screen: </td><td><%= @show.screen.name %></td></tr>      
 	<tr><td>Time Slot: </td><td><%= @show.time_slot.name %></td></tr>
 	<tr><td>Date: </td><td><%= @show.show_date %></td></tr>
-	<tr><td>Start Time: </td><td><%= @show.time_slot.start_time.strftime("%H:%M") %></td></tr>
-        <tr><td>End Time: </td><td><%= @show.time_slot.end_time.strftime("%H:%M") %></td></tr>
-        <tr><td>Price: </td><td><%= @show.seat_price %></td></tr>
+	<tr><td>Start Time: </td><td style="text-align:right"><%= @show.time_slot.start_time.strftime("%H:%M") %></td></tr>
+        <tr><td>End Time: </td><td style="text-align:right"><%= @show.time_slot.end_time.strftime("%H:%M") %></td></tr>
+        <tr><td>Price: </td><td style="text-align:right"><%= @show.seat_price %></td></tr>
      </tbody>
    </table>
   <%= render 'form', booking: @booking, show: @show %>

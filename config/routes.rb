@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :bookings
   resources :shows
   resources :time_slots
   resources :movies
   resources :screens
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'movies#index'
   resources :users
   resources :sessions, only: [:new, :create, :destroy]

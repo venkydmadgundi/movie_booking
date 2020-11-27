@@ -28,14 +28,14 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
-    @show = Show.find(params[:show_id])
+    @booking.show = Show.find(params[:show_id])
     puts @booking.inspect
-    puts @show.inspect
-    @show.available_seats -= @booking.seats
+    puts @booking.show.inspect
+    @booking.show.available_seats -= @booking.seats
 
     respond_to do |format|
       if @booking.save
-	@show.save
+        @booking.show.save
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
