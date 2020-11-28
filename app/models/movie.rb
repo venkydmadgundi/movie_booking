@@ -6,4 +6,5 @@ class Movie < ApplicationRecord
   scope :active, -> { where("is_active = true") }
   has_many :shows
   has_many :screens, through: :shows
+
 end

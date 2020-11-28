@@ -69,6 +69,17 @@ class BookingsController < ApplicationController
     end
   end
 
+  def populate_show
+    @show = Show.where(['movie_id=?',params[:id]])
+#    @show = movie.shows
+    if @show
+      respond_to do |format|
+        format.js { render 'populate_show', :formats => [:js] }
+      end
+    else
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
@@ -77,6 +88,6 @@ class BookingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:user_id, :show_id, :seats, :total_price, :status)
+      params.require(:booking).permit(:user_id, :show_id, :seats, :total_price, :status, :movie_tickets)
     end
 end

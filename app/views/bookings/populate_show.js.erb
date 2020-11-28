@@ -1,0 +1,6 @@
+<table>
+<tr><td>Date:<%= @show.inspect%></td>
+	<td><%= select("show", "show_date", @show.collect {|p| [ p.show_date, p.id ] }, { include_blank: true }) %></td></tr>
+	</table>
+
+  

@@ -6,6 +6,7 @@ class CreateBookings < ActiveRecord::Migration[6.0]
       t.integer :seats
       t.decimal :total_price, precision: 8, scale: 2
       t.string :status
+      t.text :movie_tickets
 
       t.timestamps
     end

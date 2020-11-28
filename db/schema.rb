@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_153650) do
     t.integer "seats"
     t.decimal "total_price", precision: 8, scale: 2
     t.string "status"
+    t.text "movie_tickets"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["show_id"], name: "index_bookings_on_show_id"
