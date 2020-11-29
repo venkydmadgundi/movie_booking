@@ -1,8 +1,8 @@
 const seats = document.querySelectorAll(".row .seat:not(.occupied)");
 const seatContainer = document.querySelector(".row-container");
-const count = document.getElementById("booking[seats]");
-const total = document.getElementById("booking[total_price]");
-const selectedMovieTicket = document.getElementById("booking[movie_tickets]");
+const count = document.getElementById("booking_seats");
+const total = document.getElementById("booking_total_price");
+const selectedMovieTicket = document.getElementById("booking_movie_tickets");
 
 populateUI();
 
@@ -15,11 +15,10 @@ function updateSelectedCount() {
 	const selectedSeats = document.querySelectorAll(".container .selected");
 	var totalPrice = 0;
 	var selectedTicket = [];
-
+        console.log(selectedSeats.length);
 	seatsIndex = [...selectedSeats].map(function(seat) {
 		selectedSeat = [...seats].indexOf(seat);
 		count.value = selectedSeats.length-1;
-
 		if( selectedSeat != -1 ){
 			selectedTicket.push(selectedSeat);
 			switch (true) {
@@ -35,7 +34,6 @@ function updateSelectedCount() {
 			}     }
 		total.value = totalPrice;
 		selectedMovieTicket.value = selectedTicket;
-
 		return selectedSeat;
 	});
 

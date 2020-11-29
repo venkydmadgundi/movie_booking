@@ -12,46 +12,30 @@
 		<small>Occupied</small>
 	</li>
 </ul>
+<% booking_tickets = @show.first.bookings.map(&:movie_tickets).join(",").split(",") %>
 <div class="container">
 	<div class="movie-screen">
 		<img src='screen-thumb.png' alt='screen' />
 	</div>
 	<div class="row-container">
-		<div class="row" id="row-first">
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
+		<div class="row">
+			<% index = 0 %>
+			<% 10.times do %>
+			<div class="seat <%= 'occupied' if booking_tickets.include?(index.to_s) %>"></div>
+			<% index += 1 %>
+			<% end %>
 		</div>
-		<div class="row" id="row-second">
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
+		<div class="row">
+			<% 10.times do %>
+                        <div class="seat <%= 'occupied' if booking_tickets.include?(index.to_s) %>"></div>
+                        <% index += 1 %>
+                        <% end %>
 		</div>
-		<div class="row" id="row-third">
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
-			<div class="seat"></div>
+		<div class="row">
+			<% 10.times do %>
+                        <div class="seat <%= 'occupied' if booking_tickets.include?(index.to_s) %>"></div>
+                        <% index += 1 %>
+                        <% end %>
 		</div>
 	</div>
 </div>

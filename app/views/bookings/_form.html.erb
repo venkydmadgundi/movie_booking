@@ -1,5 +1,5 @@
 <div class="booking-container">
-<%= form_with(model: booking, local: true) do |form| %>
+<%= form_for :booking do |form| %>
   <% if booking&.errors&.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
@@ -13,19 +13,19 @@
   <% end %>
   <div class="field">
 	  <%= form.label :seats %>
-	  <%= form.text_field "booking[seats]", max: 24, value: 0 %>
+	  <%= form.text_field "seats", max: 24, value: 0 %>
   </div>
 
   <div class="field">
 	  <%= form.label :total %>
-	  <%= form.text_field "booking[total_price]", readonly: true %>
+	  <%= form.text_field "total_price", readonly: true %>
   </div>
   <div class="actions">
-    <%= form.hidden_field "booking[movie_tickets]", value: [] %>
+    <%= form.hidden_field "movie_tickets", value: [] %>
     <% ticket_action = "Book" %>
-    <%= form.hidden_field "booking[status]", value: ticket_action %>
-    <%= form.hidden_field "booking[user_id]", value: (current_user ? current_user.id : '') %>
-    <%= form.hidden_field "booking[show_id]", value: "0" %>
+    <%= form.hidden_field "status", value: ticket_action %>
+    <%= form.hidden_field "user_id", value: (current_user ? current_user.id : '') %>
+    <%= form.hidden_field "show_id", value: "0" %>
     <%= form.submit "#{ticket_action} Ticket", class: 'btn btn-primary' %>
   </div>
   <%= javascript_pack_tag 'movie_show' %>
