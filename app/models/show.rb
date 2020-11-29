@@ -14,7 +14,7 @@ class Show < ApplicationRecord
   scope :screen_name, -> (name){ where(screen: Screen.find_by(name: name )) }
   default_scope { order("show_date DESC") }
 
-  scope :get_screen, lambda { |show_date|
+  scope :get_show_date, lambda { |show_date|
     where("show_date = ? ", show_date)
   }
 

@@ -29,10 +29,10 @@ def get_show_time(show_hour)
   end
 end
 
-time_slot = TimeSlot.create!([{name: '12-3', start_time: '12', end_time: '15'},
-			      {name: '3-6', start_time: '15', end_time: '18'},
-			      {name: '6-9', start_time: '18', end_time: '21'},
-			      {name: '9-12', start_time: '21', end_time: '24'}])
+time_slot = TimeSlot.create!([{name: '12-15', start_time: '12', end_time: '15'},
+			      {name: '15-18', start_time: '15', end_time: '18'},
+			      {name: '18-21', start_time: '18', end_time: '21'},
+			      {name: '21-24', start_time: '21', end_time: '24'}])
 
 Screen.all.each do |screen|
   index = 0

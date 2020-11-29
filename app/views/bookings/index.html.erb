@@ -1,17 +1,18 @@
 <script type="text/javascript">
-  $(document).ready(function(){
+/*  $(document).ready(function(){
 	  $('select#movie_movie').on('change', function() {
 		  console.log(this.selected);
-   });
+   });*/
 </script>
 <h3>Welcome to Movie Booking </h3>
 <hr/>
 <div class="movie-container">
-	<label>Pick a movie:</label>
-	<%= select("movie", "movie", Movie.all.collect { |m| [ m.name, m.id ] }, { prompt: 'Select Movie' })%>
-	<%#= collection_select :movie, :id, Movie.all, :id, :name, {}, {prompt: 'Select Movie', onchange: '$.get("/populate_show")'} %>
-	
-	Date : <div id='selectDate'></div>
+	<table>
+		<tr><td><label>Pick a movie:</label></td><td><%= select("movie", "movie", Movie.all.collect { |m| [ m.name, m.id ] }, { prompt: 'Select Movie' })%></td></tr>
+		<tr><td><label>Date :</label></td><td><div class="show_dates"><select id='show_date'></select></div></td></tr>
+		<tr><td><label>Screen:</label></td><td><div class="show_screen"><select id='show_screen'></select></div><td></tr>
+		<tr><td><label>Time:</label></td><td><div class="show_time"><select id='show_time'></select></div><td></tr>
+	</table>
 </div>
 <ul class="showcase">
 	<li>
