@@ -13,129 +13,21 @@
   <% end %>
   <div class="field">
 	  <%= form.label :seats %>
-	  <%= form.text_field :seats, max: 24, value: 0 %>
+	  <%= form.text_field "booking[seats]", max: 24, value: 0 %>
   </div>
 
   <div class="field">
 	  <%= form.label :total %>
-	  <%= form.text_field :total_price, readonly: true %>
+	  <%= form.text_field "booking[total_price]", readonly: true %>
   </div>
   <div class="actions">
-    <%= form.hidden_field :movie_tickets, value: [] %>
+    <%= form.hidden_field "booking[movie_tickets]", value: [] %>
     <% ticket_action = "Book" %>
-    <%= form.hidden_field :status, value: ticket_action %>
-    <%= form.hidden_field :user_id, value: (current_user ? current_user.id : '') %>
-    <%= form.hidden_field :show_id, value: "" %>
+    <%= form.hidden_field "booking[status]", value: ticket_action %>
+    <%= form.hidden_field "booking[user_id]", value: (current_user ? current_user.id : '') %>
+    <%= form.hidden_field "booking[show_id]", value: "0" %>
     <%= form.submit "#{ticket_action} Ticket", class: 'btn btn-primary' %>
   </div>
-  <script>
-	  const seats = document.querySelectorAll(".row .seat:not(.occupied)");
-	  const seatContainer = document.querySelector(".row-container");
-	  const count = document.getElementById("seats");
-	  const total = document.getElementById("total_price");
-	  const movieSelect = document.getElementById("movie_movie");
-	  const selectedMovieTicket = document.getElementById("movie_tickets");
-          const timeSelect = document.getElementById("show_time")
-
-
-	  populateUI();
-
-	  timeSelect.addEventListener("change", function(e) {
-            $.ajax({
-               url: "/populate_screen?show_id=" + timeSelect.value,
-                  type: "GET"
-                   })
-	  });
-
- 	  
-
-
-	  let ticketPrice = +150 //+movieSelect.value;
-
-	  // Save selected movie index and price
-	  function setMovieData(movieIndex, moviePrice) {
-	  localStorage.setItem("selectedMovieIndex", movieIndex);
-	  localStorage.setItem("selectedMoviePrice", moviePrice);
-	  }
-	  
-	  function updateSelectedCount() {
-	  const selectedSeats = document.querySelectorAll(".container .selected");
-	  var totalPrice = 0;
-          var selectedTicket = [];
-
-	  seatsIndex = [...selectedSeats].map(function(seat) {
-		  selectedSeat = [...seats].indexOf(seat);
-		  count.value = selectedSeats.length-1;
-		  
-		  if( selectedSeat != -1 ){
-		  selectedTicket.push(selectedSeat);
-		  switch (true) {
-		  case (selectedSeat <= 9):
-		          totalPrice += parseInt(150)
-		          break;
-		  case (selectedSeat > 9 && selectedSeat <= 19):
-			  totalPrice += parseInt(200)
-		          break;
-		  case (selectedSeat > 19):
-			  totalPrice += parseInt(250)
-		          break;
-		  }	}
-	  total.value = totalPrice;
-	  selectedMovieTicket.value = selectedTicket;
-          
-	  return selectedSeat;
-	  });
-
-	  localStorage.setItem("selectedSeats", JSON.stringify(seatsIndex));
-
-	  }
-
-	  // Get data from localstorage and populate
-	  function populateUI() {
-	  const selectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
-
-	  if (selectedSeats !== null && selectedSeats.length > 0) {
-	  seats.forEach(function(seat, index) {
-	  if (selectedSeats.indexOf(index) > -1) {
-	  seat.classList.add("selected");
-	  }
-	  });
-	  }
-
-	  const selectedMovieIndex = localStorage.getItem("selectedMovieIndex");
-
-	  if (selectedMovieIndex !== null) {
-	  movieSelect.selectedIndex = selectedMovieIndex;
-	  }
-	  }
-
-	  // Movie select event
-
-	movieSelect.addEventListener("change", function(e) {
-	console.log(movieSelect.value)
-		  ticketPrice = +movieSelect.value;
-		$.ajax({
-  		        url: "/populate_show?movie_id=" + movieSelect.value,
-			type: "GET"
-			  })
-	  setMovieData(e.target.selectedIndex, e.target.value);
-	  updateSelectedCount();
-	  });
-
-	  // Adding selected class to only non-occupied seats on 'click'
-
-	  seatContainer.addEventListener("click", function(e) {
-	  if (
-	  e.target.classList.contains("seat") &&
-	  !e.target.classList.contains("occupied")
-	  ) {
-	  e.target.classList.toggle("selected");
-	  updateSelectedCount();
-	  }
-	  });
-
-	  // Initial count and total rendering
-	  updateSelectedCount();
-  </script>
+  <%= javascript_pack_tag 'movie_show' %>
 <% end %>
 </div>

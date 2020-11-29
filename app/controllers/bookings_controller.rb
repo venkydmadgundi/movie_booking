@@ -27,8 +27,7 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
-    @booking.user = current_user
-    @booking.show = Show.find(params[:show_id])
+    @booking.show = Show.find(params[:booking][:show_id])
     @booking.show.available_seats -= @booking.seats
 
     respond_to do |format|
@@ -77,7 +76,23 @@ class BookingsController < ApplicationController
         format.js { render 'populate_show', :formats => [:js] }
       end
     else
+      respond_to do |format|
+        format.json { render json: @show.errors, status: :unprocessable_entity}
+      end
     end
+  end
+
+  def populate_screen
+    @show = Show.where("movie_id=? AND show_date=? AND screen_id=? AND time_slot_id=?", params[:movie_id], params[:show_date], params[:screen_id], params[:time_slot_id])
+    puts @show.inspect
+    if @show
+      respond_to do |format|
+        format.js { render 'populate_screen', :formats => [:js] }                                                                   end
+    else
+      respond_to do |format|
+        format.json { render json: @show.errors, status: :unprocessable_entity}                                                   end
+    end
+      
   end
 
   private

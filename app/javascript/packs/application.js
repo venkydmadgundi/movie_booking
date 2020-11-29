@@ -21,8 +21,8 @@ require("channels")
 	//  }
   $('select#show_movie_id').change(function() { alert('hello'); });
 }*/
-(function($) {
+/*(function($) {
 	  $(document).on("change", "select#show_movie_id", function() {
 		      alert('Venky');
 		    });
-}(jQuery));
+}(jQuery));*/

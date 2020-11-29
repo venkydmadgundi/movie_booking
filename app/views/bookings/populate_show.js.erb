@@ -2,17 +2,18 @@
 $("#show_date").empty();
 $("#show_date").append("<option>Select Date</option>");
 <% @show_date.each do |show_date| %>
-		$("#show_date").append("<option value='#{show_date}'><%=show_date%></option>");
+		$("#show_date").append("<option value='<%=show_date%>'><%=show_date%></option>");
 <% end %>
 <% @show_screen = @show.map(&:screen).uniq.collect{|screen| [screen.id, screen.name]}%>
 $("#show_screen").empty();
 $("#show_screen").append("<option>Select Screen</option>");
 <% @show_screen.each do |show_screen| %>
-  $("#show_screen").append("<option value='#{show_screen[0]}'><%=show_screen[1]%></option>");
+$("#show_screen").append("<option value='<%=show_screen[0]%>'><%=show_screen[1]%></option>");
 <% end %>
 	
 <% @show_time_slot = @show.map(&:time_slot).uniq.collect{|time_slot| [time_slot.id, time_slot.name]}%>
 $("#show_time").empty();
 $("#show_time").append("<option>Select Time</option>");
 <% @show_time_slot.each do |show_time| %>
-  $("#show_time").append("<option value='#{show_time[0]}'><%=show_time[1]%></option>");                               <% end %>
+$("#show_time").append("<option value='<%=show_time[0]%>'><%=show_time[1]%></option>");                               
+<% end %>
