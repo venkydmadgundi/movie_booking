@@ -69,7 +69,7 @@ class BookingsController < ApplicationController
   end
 
   def populate_show
-    @show = Show.where("movie_id=?", params[:movie_id])
+	  @show = Show.where("movie_id=?", params[:movie_id]).includes(:time_slot, :screen)
     @show.get_show_date(params[:show_date]) if params[:show_date]
     if @show
       respond_to do |format|
